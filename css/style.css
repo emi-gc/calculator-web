@@ -42,9 +42,9 @@ body.theme-1 {
 }
 
 .theme-1 .equals-key {
-    background-color: hsl(225, 21% 49%);
+    background-color: hsl(6, 63%, 50%);
     color: white;
-    box-shadow: 0px 4px hsl(224, 28%, 35%);
+    box-shadow: 0px 4px hsl(6, 70%, 34%);
 }
 
 /*theme 2*/
@@ -62,12 +62,6 @@ body.theme-2 {
     background-color: hsl(0, 5%, 81%);
 }
 
-.theme-2 .special-key {
-    background-color: hsl(185, 42%, 37%);
-    color: white;
-    box-shadow: 0px 4px hsl(185, 58%, 25%);
-}
-
 .theme-2 .key {
     background-color: hsl(45, 7%, 89%);
     color:hsl(60, 10%, 19%);
@@ -75,12 +69,18 @@ body.theme-2 {
 }
 
 .theme-2 .equals-key {
-    background-color: hsl(225, 21% 49%);
+    background-color: hsl(25, 98%, 40%);
     color: white;
-    box-shadow: 0px 4px hsl(224, 28%, 35%);
+    box-shadow: 0px 4px hsl(25, 99%, 27%);
 }
 
-/*theme */
+.theme-2 .special-key {
+    background-color: hsl(185, 42%, 37%);
+    color: white;
+    box-shadow: 0px 4px hsl(185, 58%, 25%);
+}
+
+/*theme 3*/
 
 body.theme-3 {
     background-color: hsl(268, 75%, 9%);
@@ -95,12 +95,6 @@ body.theme-3 {
     background-color: hsl(268, 71%, 12%);
 }
 
-.theme-3 .special-key {
-    background-color: hsl(185, 42%, 37%);
-    color: white;
-    box-shadow: 0px 4px hsl(185, 58%, 25%);
-}
-
 .theme-3 .key {
     background-color: hsl(268, 47%, 21%);
     color:hsl(52, 100%, 62%);
@@ -110,7 +104,13 @@ body.theme-3 {
 .theme-3 .equals-key {
     background-color: hsl(176, 100%, 44%);
     color: hsl(198, 20%, 13%);
-    box-shadow: 0px 4px hsl(224, 28%, 35%);
+    box-shadow: 0px 4px hsl(177, 92%, 70%);
+}
+
+.theme-3 .special-key {
+    background-color: hsl(281, 89%, 26%);
+    color: white;
+    box-shadow: 0px 4px hsl(285, 91%, 52%);
 }
 
 /*header*/
@@ -127,8 +127,8 @@ body.theme-3 {
 
 .theme-area h2 {
     font-size: 12px;
+    line-height: 1;
     margin-bottom: 5px;
-
     transition: color 0.3s;
 }
 
@@ -143,6 +143,7 @@ body.theme-3 {
 
 .theme-numbers p {
     font-size: 12px;
+    line-height: 1;
     transition: color 0.3s;
 }
 
@@ -156,7 +157,34 @@ body.theme-3 {
 }
 
 #theme {
+    width: 100%;
     margin: 0;
+}
+
+/* Chrome, Safari, Edge, Opera things for the dot changing color with the themes idk */
+
+.theme-1 .form-range::-webkit-slider-thumb {
+    background-color: hsl(6, 63%, 50%);
+}
+
+.theme-1 .form-range::-moz-range-thumb {
+    background-color: hsl(6, 63%, 50%);
+}
+
+.theme-2 .form-range::-webkit-slider-thumb {
+    background-color: hsl(25, 98%, 40%);
+}
+
+.theme-2 .form-range::-moz-range-thumb {
+    background-color: hsl(25, 98%, 40%);
+}
+
+.theme-3 .form-range::-webkit-slider-thumb {
+    background-color: hsl(176, 100%, 44%);
+}
+
+.theme-3 .form-range::-moz-range-thumb {
+    background-color: hsl(176, 100%, 44%);
 }
 
 .theme-2 .theme-slider {
