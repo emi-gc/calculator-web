@@ -3,6 +3,7 @@ const theme = document.getElementById("theme");
 let num1 = null;
 let operation = null;
 let applyReset = false;
+let resultShown = false; // for DEL error handling
 const resultStatus = document.getElementById('display');
 
 const add = (a, b) => a+b ;
@@ -48,6 +49,15 @@ keys.forEach((key) => {
         const action = key.dataset.action;
 
         if (num === "delete") {
+            // DEL ERROR HANDLING, previously when you had a result showing on screen you could
+            //press del and it would delete digits off of it i dont think thats right
+            if (resultShown) { 
+                showDisplay("0");
+                applyReset = false;
+                resultShown = false; 
+                return;
+            }
+
             const nextValue = resultStatus.textContent.slice(0, -1);
             showDisplay(nextValue || "0");
             return;
@@ -57,6 +67,7 @@ keys.forEach((key) => {
             num1 = null;
             operation = null;
             applyReset = false;
+            resultShown = false; // del
             showDisplay("0");
             return;
 
@@ -66,6 +77,7 @@ keys.forEach((key) => {
             if (applyReset) { // for decimals not to append to the old value
                 showDisplay("0.");
                 applyReset = false; 
+                resultShown = false; // del
             } else if (!resultStatus.textContent.includes(".")) {
                 showDisplay(resultStatus.textContent + ".");
             }
@@ -101,6 +113,7 @@ keys.forEach((key) => {
                 num1 = currentNumber;
             }
             operation = op;
+            resultShown = false; // del
 
             // tell calculator to clear the display when the next number is typed.
             applyReset = true;
@@ -120,6 +133,7 @@ keys.forEach((key) => {
             num1 = null;
             operation = null;
             applyReset = true; // for no appending numbers to result
+            resultShown = true; // del
             return;
         }
 
@@ -128,7 +142,8 @@ keys.forEach((key) => {
 
             if (applyReset || displayIsError) {
                 showDisplay(num);
-                applyReset = false;
+                applyReset = false; 
+                resultShown = false; // del
             } else {
                 // removed ternary because weird
                 if (resultStatus.textContent === "0") {
