@@ -1,0 +1,268 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap");
+
+body {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700;
+    margin: 0;
+    transition: background-color 180ms ease, color 180ms ease;
+    min-height: 100;
+    padding-top: 60px;
+}
+
+.calculator {
+    width: 540px;
+}
+
+/*theme 1*/
+body.theme-1 {
+    background-color: hsl(222, 26%, 31%);
+    color: white;
+}
+
+.theme-1 .screen {
+    background-color: hsl(224, 36%, 15%);
+}
+
+.theme-1 .keypad {
+    background-color: hsl(223, 31%, 20%);
+}
+
+.theme-1 .key {
+    background-color: hsl(30, 25%, 89%);
+    color: hsl(221, 14%, 31%);
+    box-shadow: 0px 4px hsl(28, 16%, 65%);
+}
+
+.theme-1 .special-key {
+    background-color: hsl(225, 21%, 49%);
+    color:white;
+    box-shadow: 0px 4px hsl(224, 28%, 35%);
+}
+
+.theme-1 .equals-key {
+    background-color: hsl(225, 21% 49%);
+    color: white;
+    box-shadow: 0px 4px hsl(224, 28%, 35%);
+}
+
+/*theme 2*/
+
+body.theme-2 {
+    background-color: hsl(0, 0%, 90%);
+    color: hsl(60, 10%, 19%);
+}
+
+.theme-2 .screen {
+    background-color: hsl(0, 0%, 93%);
+}
+
+.theme-2 .keypad {
+    background-color: hsl(0, 5%, 81%);
+}
+
+.theme-2 .special-key {
+    background-color: hsl(185, 42%, 37%);
+    color: white;
+    box-shadow: 0px 4px hsl(185, 58%, 25%);
+}
+
+.theme-2 .key {
+    background-color: hsl(45, 7%, 89%);
+    color:hsl(60, 10%, 19%);
+    box-shadow: 0px 4px hsl(35,11%, 61%);
+}
+
+.theme-2 .equals-key {
+    background-color: hsl(225, 21% 49%);
+    color: white;
+    box-shadow: 0px 4px hsl(224, 28%, 35%);
+}
+
+/*theme */
+
+body.theme-3 {
+    background-color: hsl(268, 75%, 9%);
+    color: hsl(52, 100%, 62%);
+}
+
+.theme-3 .screen {
+    background-color: hsl(268, 71%, 12%);
+}
+
+.theme-3 .keypad {
+    background-color: hsl(268, 71%, 12%);
+}
+
+.theme-3 .special-key {
+    background-color: hsl(185, 42%, 37%);
+    color: white;
+    box-shadow: 0px 4px hsl(185, 58%, 25%);
+}
+
+.theme-3 .key {
+    background-color: hsl(268, 47%, 21%);
+    color:hsl(52, 100%, 62%);
+    box-shadow: 0px 4px hsl(290,70%, 36%);
+}
+
+.theme-3 .equals-key {
+    background-color: hsl(176, 100%, 44%);
+    color: hsl(198, 20%, 13%);
+    box-shadow: 0px 4px hsl(224, 28%, 35%);
+}
+
+/*header*/
+
+.top-bar h1 {
+    font-size: 32px;
+
+    transition: color 0.3s;
+}
+
+.theme-area {
+    gap:25px
+}
+
+.theme-area h2 {
+    font-size: 12px;
+    margin-bottom: 5px;
+
+    transition: color 0.3s;
+}
+
+.theme-picker {
+    width: 70px;
+}
+
+.theme-numbers {
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}
+
+.theme-numbers p {
+    font-size: 12px;
+    transition: color 0.3s;
+}
+
+/*theme slider*/
+
+.theme-slider {
+    background-color: hsl(223, 31%, 20%);
+    border-radius:20px;
+    padding:4px;
+    transition: background-color 0.3s;
+}
+
+#theme {
+    margin: 0;
+}
+
+.theme-2 .theme-slider {
+    background-color: hsl(0, 5%, 81%);
+}
+
+.theme-3 .theme-slider {
+    background-color: hsl(268, 71%, 21%);
+}
+
+.theme-3 .theme-slider {
+    background-color: hsl(268, 71%, 12%);
+}
+
+
+.screen-wrapper {
+    margin-top: 30px;
+}
+
+.screen {
+    height: 128px;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    transition: background-color 0.3s;
+}
+
+.screen p {
+    font-size: 56px;
+    text-align: right;
+    transition: color 0.3s;
+}
+
+.keypad {
+    margin-top: 24px;
+
+    padding: 30px;
+
+    border-radius: 10px;
+
+    transition: background-color 0.3s;
+}
+
+.keypad-row {
+    margin-bottom: 24px;
+}
+
+.last-row {
+    margin-bottom: 0px;
+}
+
+.key {
+    height: 60px;
+    border: none;
+    border-radius: 8px;
+    font-size: 36px;
+    font-weight:700;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.1s;
+}
+
+.special-key {
+    font-size: 20px;
+}
+
+.equals-key {
+    font-size: 20px;
+}
+
+/* mobile */
+
+@media (max-width: 600px)  {
+
+    body {
+        padding-top: 30px;
+    }
+
+    .calculator {
+        width: 327px;
+    }
+
+    .screen {
+        height: 88px;
+    }
+
+    .screen p {
+        font-size: 40px;
+    }
+
+    .keypad {
+        padding: 24px;
+    }
+
+    .keypad-row {
+        margin-bottom: 13px;
+    }
+
+    .key {
+        height: 60px;
+        font-size: 32px;
+    }
+
+    .special-key {
+        font-size: 18px;
+    }
+
+    .equals-key {
+        font-size: 18px;
+    }
+}
