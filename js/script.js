@@ -35,16 +35,12 @@ function calculator(numA, numB, callback) {
     return callback(numA, numB);
 }
 
-document.querySelectorAll('.number').forEach((button) => {
-    button.addEventListener('click', (e) => {
-       const value = button.getAttribute('.number');
-       if (valorBoton === 'reset') {
-        
-
-
-};
-
 const theme = document.getElementById("theme");
+
+const currentTheme = ["theme-1", "theme-2", "theme-3"].findIndex((className) =>
+    document.body.classList.contains(className)
+);
+theme.value = currentTheme === -1 ? 0 : currentTheme;
 
 theme.addEventListener("input", function() {
     document.body.classList.remove("theme-1","theme-2", "theme-3");
