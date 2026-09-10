@@ -3,8 +3,6 @@ const theme = document.getElementById("theme");
 let num1 = null;
 let operation = null;
 let applyReset = false;
-
-const calculateBtn = document.getElementById('calculate');
 const resultStatus = document.getElementById('display');
 
 const add = (a, b) => a+b ;
@@ -18,7 +16,7 @@ const divide = (a, b) => {
     return a / b;
 };
 
-const Jerarquia = {
+const hierarchy = { // changed name to english for consistency
    'add': {prioridad: 1, callback: add},
    'subtract': {prioridad: 1, callback: subtract},
    'multiply': {prioridad: 2, callback: multiply},
@@ -50,7 +48,8 @@ keys.forEach((key) => {
         const action = key.dataset.action;
 
         if (num === "delete") {
-            showDisplay(resultStatus.textContent.slice(0, -1));
+            const nextValue = resultStatus.textContent.slice(0, -1);
+            showDisplay(nextValue || "0");
             return;
         }
 
@@ -64,33 +63,79 @@ keys.forEach((key) => {
         }
 
         if (action === "decimal") {
-            if (!resultStatus.textContent.includes(".")) {
+            if (applyReset) { // for decimals not to append to the old value
+                showDisplay("0.");
+                applyReset = false; 
+            } else if (!resultStatus.textContent.includes(".")) {
                 showDisplay(resultStatus.textContent + ".");
             }
             return;
         }
 
-        if(op) {
-            num1 = Number(resultStatus.textContent);
+        // commented because i want to remember what i did for later exercises !!!!
+        if (op) {
+            // convert whatever is currently on the display into a number.
+            const currentNumber = Number(resultStatus.textContent);
+
+            // if there is already an operation saved, that means this is a chained calculation.
+            if (operation) {
+                // calculate the previous saved number with the current number.
+                const result = calculator(num1, currentNumber, hierarchy[operation].callback);
+
+                // error handling
+                if (result instanceof Error) {
+                    showDisplay(result.message);
+                    num1 = null;
+                    operation = null;
+                    applyReset = true;
+                    return;
+                }
+
+                // show result of calculation
+                showDisplay(result);
+
+                // save the first number for the next operation
+                num1 = result;
+            } else {
+                // if there is no previous operation, save the current number as the first number.
+                num1 = currentNumber;
+            }
             operation = op;
+
+            // tell calculator to clear the display when the next number is typed.
             applyReset = true;
             return;
         }
 
         if (action === "equals" && operation) {
-            const result1 = calculator(num1, Number(resultStatus.textContent), Jerarquia[operation].callback);
-            showDisplay(result1 instanceof Error ? result1.message : result1);
+            const result1 = calculator(num1, Number(resultStatus.textContent), hierarchy[operation].callback);
+
+            // removed ternary because weird
+            if (result1 instanceof Error) {
+                showDisplay(result1.message);
+            } else {
+                showDisplay(result1);
+            }
+
             num1 = null;
             operation = null;
-            applyReset = false;
+            applyReset = true; // for no appending numbers to result
+            return;
         }
 
         if (num !== undefined) {
-            if (applyReset || resultStatus.textContent === "Error") {
+            const displayIsError = resultStatus.textContent.startsWith("Error"); // for consistent error reset
+
+            if (applyReset || displayIsError) {
                 showDisplay(num);
                 applyReset = false;
             } else {
-                showDisplay(resultStatus.textContent === "0" ? num : resultStatus.textContent + num);
+                // removed ternary because weird
+                if (resultStatus.textContent === "0") {
+                    showDisplay(num);
+                } else {
+                    showDisplay(resultStatus.textContent + num);
+                }
             }
             return;
         }
@@ -99,8 +144,14 @@ keys.forEach((key) => {
 const currentTheme = ["theme-1", "theme-2", "theme-3"].findIndex((className) =>
     document.body.classList.contains(className)
 );
-theme.value = currentTheme === -1 ? 0 : currentTheme;
 
+// previously used ternary, not entirely clear
+if (currentTheme === -1) { 
+    theme.value = 0;
+} else {
+    theme.value = currentTheme;
+}
+// handles theme changing
 theme.addEventListener("input", function() {
     document.body.classList.remove("theme-1","theme-2", "theme-3");
     document.body.classList.add("theme-" + (Number(theme.value) + 1));
