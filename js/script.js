@@ -160,7 +160,7 @@ const currentTheme = ["theme-1", "theme-2", "theme-3"].findIndex((className) =>
     document.body.classList.contains(className)
 );
 
-// previously used ternary, not entirely clear
+// previously used ternary, ternary = weird
 if (currentTheme === -1) { 
     theme.value = 0;
 } else {
