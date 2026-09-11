@@ -304,6 +304,35 @@ body.theme-3 {
     font-size: 20px;
 }
 
+.functions-toggle {
+    width: 100%;
+    margin-top: 24px;
+    font-size: 20px;
+}
+
+.trigonometric {
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: max-height 240ms ease, margin-top 240ms ease, opacity 180ms ease, transform 240ms ease;
+}
+
+.trigonometric.is-open {
+    max-height: 100px;
+    margin-top: 20px;
+    opacity: 1;
+    transform: translateY(0);
+
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.trigonometric .key {
+    font-size: 20px;
+}
+
 /* mobile requirements */
 
 @media (max-width: 600px)  {

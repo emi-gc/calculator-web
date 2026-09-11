@@ -5,6 +5,7 @@ let operation = null;
 let applyReset = false;
 let resultShown = false; // for DEL error handling
 const resultStatus = document.getElementById('display');
+const functionsPanel = document.getElementById('trigonometric-panel');
 
 const add = (a, b) => a+b ;
 const subtract = (a, b) => a-b ;
@@ -17,11 +18,30 @@ const divide = (a, b) => {
     return a / b;
 };
 
+// trigonometric functions
+const sin = (a) => Math.sin(a);
+const cos = (a) => Math.cos(a);
+const tan = (a) => Math.tan(a);
+const asin = (a) => Math.asin(a);
+const acos = (a) => Math.acos(a);
+const atan = (a) => Math.atan(a);
+
+const unaryFunctions = { sin, cos, tan, asin, acos, atan };
+
 const hierarchy = { // changed name to english for consistency
-   'add': {prioridad: 1, callback: add},
-   'subtract': {prioridad: 1, callback: subtract},
-   'multiply': {prioridad: 2, callback: multiply},
-   'divide': {prioridad: 2, callback: divide}
+   'add': {priority: 1, callback: add},
+   'subtract': {priority: 1, callback: subtract},
+   'multiply': {priority: 2, callback: multiply},
+   'divide': {priority: 2, callback: divide},
+
+   // optional trigonometric functions
+   'sin': {priority: 3, callback: sin},
+   'cos': {priority: 3, callback: cos},
+   'tan': {priority: 3, callback: tan},
+   'asin': {priority: 3, callback: asin},
+   'acos': {priority: 3, callback: acos},
+   'atan': {priority: 3, callback: atan}
+
 };
 
 function calculator(numA, numB, callback) {
@@ -47,6 +67,29 @@ keys.forEach((key) => {
         const num = key.dataset.number;
         const op = key.dataset.operator;
         const action = key.dataset.action;
+        const functionName = key.dataset.function;
+
+        if (action === "toggle-functions") {
+            const isOpen = functionsPanel.classList.toggle("is-open");
+            key.setAttribute("aria-expanded", isOpen);
+            functionsPanel.setAttribute("aria-hidden", !isOpen);
+            return;
+        }
+
+        if (functionName) {
+            const value = Number(resultStatus.textContent);
+            const result = unaryFunctions[functionName](value);
+
+            if (!Number.isFinite(result)) {
+                showDisplay("Error");
+                applyReset = true;
+            } else {
+                showDisplay(result);
+                applyReset = true;
+                resultShown = true;
+            }
+            return;
+        }
 
         if (num === "delete") {
             // DEL ERROR HANDLING, previously when you had a result showing on screen you could
